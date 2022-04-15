@@ -107,6 +107,12 @@ for(int i=0 ; i < ville; i++) {
 		}
 	}
 }
+// demarer l'execution
+simplexe_methode.solve();
+
+} catch (IloException e){
+    System.out.print("Exception levée " + e);
+}
 	
   }
  }
