@@ -44,7 +44,7 @@ public class Exo10 {
  }
 }
    
-// declaration de la fonction objectif
+// declaration de la fonction objectifs
 
     IloLinearNumExpr func_obj = simplexe_methode.linearNumExpr();
 
