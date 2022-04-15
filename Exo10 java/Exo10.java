@@ -2,7 +2,7 @@
 public class Exo10 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubs
         resolution();
         
 	public static void resolution (){
@@ -26,7 +26,39 @@ public class Exo10 {
                 }
             }
         };		  
-				
+//create decision variable & objectif function
+            IloNumVar[][][][] flow_ijkm = new IloNumVar[ville][ville][ville][ville];
+
+// les Variables de décision de type boolean    
+            IloNumVar[] hub = new IloNumVar[ville]; 
+
+    for (int i=0;i<nville;i++){
+     hub[ville]= simplexe_methode.boolVar();
+}
+
+    for(int i=0 ; i < ville; i++) {
+        for(int j=0 ; j < ville;j++) {
+             for(int k=0 ; k < ville; k++) {  
+                flow[i][j][k][m] = simplexe_methode.boolVarArray(ville);
+     }
+ }
+}
+   
+// declaration de la fonction objectif
+
+    IloLinearNumExpr func_obj = simplexe_methode.linearNumExpr();
+
+// Définition des coefficients de la fonction objectif
+
+    for(int i=0 ; i < ville; i++) {
+        for(int j=0 ; j < ville;j++) {
+         for(int k=0 ; k < ville; k++) {
+             for(int m=0 ; m < ville; m++) {
+                 func_obj.addTerm(flow[i][j][k][m],qnt_i_j[i][j]*cout[i][j][k][m]);
+   }
+  }
+ }
+};	
 	
 	}
 }
