@@ -52,14 +52,62 @@ public class Exo10 {
 
     for(int i=0 ; i < ville; i++) {
         for(int j=0 ; j < ville;j++) {
-         for(int k=0 ; k < ville; k++) {
-             for(int m=0 ; m < ville; m++) {
+            for(int k=0 ; k < ville; k++) {
+                for(int m=0 ; m < ville; m++) {
                  func_obj.addTerm(flow[i][j][k][m],qnt_i_j[i][j]*cout[i][j][k][m]);
-   }
-  }
- }
-};	
-	
+                }
+            }
+        }
+    };	
+
+    simplexe_methode.addMinimize(func_obj);
+
+// contraint 1
+
+simplexe_methode.addEq(simplexe_methode.sum(hub),2);
+							
+// contraint 2
+for(int i=0 ; i < ville; i++) {
+	for(int j=0 ; j < ville; j++) {
+		for(int k=0 ; k < ville; k++) {
+			for(int m=0 ; m < ville; m++) {
+			simplexe_methode.addEq(simplexe_methode.sum((IloIntSetVar) flow[i][j][k][m]),1);
+	        }
+		}
+	}
+};
+
+				  
+// contraint 3
+for(int i=0 ; i < ville; i++) {
+	for(int j=0 ; j < ville; j++) {
+		for(int k=0 ; k < ville; k++) {
+			for(int m=0 ; m < ville; m++) {
+				IloLinearNumExpr c1 = simplexe_methode.linearNumExpr();
+				IloLinearNumExpr c2 = simplexe_methode.linearNumExpr();
+				c1.addTerm(1, hub[k]);
+				c2.addTerm(1, flow[i][j][k][m]);
+				simplexe_methode.addLe(c1, c2);
+			}
+		}
 	}
 }
+				
+// contraint 4	  
+for(int i=0 ; i < ville; i++) {
+	for(int j=0 ; j < ville; j++) {
+		for(int k=0 ; k < ville; k++) {
+			for(int m=0 ; m < ville; m++) {
+				IloLinearNumExpr c1 = simplexe_methode.linearNumExpr();
+				IloLinearNumExpr c2 = simplexe_methode.linearNumExpr();
+				c1.addTerm(1, hub[m]);
+				c2.addTerm(1, flow[i][j][k][m]);
+				simplexe_methode.addLe(c1, c2);
+			}
+		}
+	}
+}
+	
+  }
+ }
 }
